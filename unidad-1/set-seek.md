@@ -20,4 +20,14 @@ En mi caso tengo varios ejemplos donde la aleatoriedad toma una papel muy import
 
 2. Juego de cartas en Unity: En este proyecto los usuarios roban cartas de una baraja, para que la baraja no siempre fuera igual hacemos uso de lo aleatorio, declaramos una variable y la inicializamos como un numero aleatorio y luego este numero lo utilizamos para dar una posición en una lista que contiene todas las cartas 
 
-3. Programación de boss final: Para que estas batallas contra un jefe final sean mas emocionantes hacemos uso de los ataques aleatorios 
+3. Programación de boss final: Para que estas batallas contra un jefe final sean mas emocionantes hacemos uso de los ataques aleatorios
+
+### 📥Actividad 3:
+**¿Que espero que suceda?**
+Quiero hacer que mi punto a medida que se desplaza de manera aleatoria en mi canvas, deje a su paso una especie de estela de su recorrido aleatorio con colores aleatorios.
+
+**¿Que sucedio?**
+El punto empezo a desplazarse de manera aleatoria en mi Canvas y a medida que se movía deja una marca de su recorrido anterior con colores random.
+
+**¿Ocurrio lo que esperaba**
+Si!, Ocurrio exactamente lo que trate de realizar, para los parametros que recibe *stroke()* simplemente le pase la funcion *random()* con el parametro hasta 255
