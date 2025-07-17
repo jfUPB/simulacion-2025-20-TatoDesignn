@@ -5,7 +5,7 @@
 ### 📥Actividad 1:
 **¿Cómo la aleatoriedad influye en el arte generativo?**
 
-Para mi la aleatoriedad dentro del arte cumple un papel muy importante, imaginemos por un momento unos visuales con forma de hondas, en donde estas siempre se hacen de la misma manera, tienen el mismo color, la misma forma y un movimiento continuo o estático. Podrás pensar igual que yo, se vuelve algo monótono y aburrido por eso es tan importante la aleatoriedad ya que esta permite mostrar diferentes colores, diferentes movimientos, la velocidad varia y sus formas siempre son distintas
+Para mí, la aleatoriedad en el arte es clave porque rompe la monotonía y permite que colores, formas y movimientos cambien constantemente, haciendo que todo sea más interesante.
 
 ### 📥Actividad 2:
 **¿Cuál es el papel de la aleatoriedad en su obra?**
