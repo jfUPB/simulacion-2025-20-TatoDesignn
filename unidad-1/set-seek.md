@@ -31,3 +31,13 @@ El punto empezo a desplazarse de manera aleatoria en mi Canvas y a medida que se
 
 **¿Ocurrio lo que esperaba**
 Si!, Ocurrio exactamente lo que trate de realizar, para los parametros que recibe *stroke()* simplemente le pase la funcion *random()* con el parametro hasta 255
+
+### 📥Actividad 4:
+**¿cuál es la diferencia entre una distribución uniforme y una no uniforme de números aleatorio?**
+
+**Distribución Uniforme:** En este utilizamos nuestra función *random* para generar números aleatorios en el rango dado en el parámetro, esto genera puntos aleatorios de manera uniforme ya que todos los números tienen la misma probabilidad de ocurrir.
+
+**Distribución no uniforme:** Para este utilizamos la función *randomGaussian*, con la cual tendremos un valor **medio** que nos servirá para generar valores alrededor de este, favoreciendo los valores mas cercanos a la media. 
+
+**Modifica el código de la caminata aleatoria para que utilice una distribución no uniforme, favoreciendo el movimiento hacia la derecha.**
+[Codigo modificado](https://editor.p5js.org/TatoDesignn/sketches/JeDPP52k3)
