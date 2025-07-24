@@ -41,3 +41,164 @@ Si!, Ocurrio exactamente lo que trate de realizar, para los parametros que recib
 
 **Modifica el código de la caminata aleatoria para que utilice una distribución no uniforme, favoreciendo el movimiento hacia la derecha.**
 [Codigo modificado](https://editor.p5js.org/TatoDesignn/sketches/JeDPP52k3)
+
+### 📥Actividad 5:
+
+**Codigo:**
+```javascript
+let walker;
+
+function setup() {
+  createCanvas(640, 240);
+  walker = new Walker();
+  background(255);
+}
+
+function draw() {
+  walker.step();
+  walker.show();
+}
+
+class Walker {
+  constructor() {
+    this.x = width / 2;
+    this.y = height / 2;
+  }
+
+  show() {
+    stroke(random(255), random(255), random(255));
+    point(this.x, this.y);
+  }
+
+  step() {
+    let stepX = randomGaussian(1, 2); // media = 1, sd = 2
+    this.x += stepX;
+
+    let stepY = randomGaussian(0, 1); 
+    this.y += stepY;
+  }
+}
+``` 
+**Enlace al programa**
+[Programa](https://editor.p5js.org/TatoDesignn/full/abeXsyD9Q)
+
+### 📥Actividad 6:
+
+**Explica por qué usaste esta técnica y qué resultados esberabas obtener**
+
+La distribución personalizada o de rechazo y aceptación nos permite generar pasos de manera aleatoria pero mas grandes evitando pasos pequeños y repetitivos en el mismo lugar 
+
+**Codigo:**
+```javascript
+let walker;
+
+function setup() {
+  createCanvas(640, 240);
+  walker = new Walker();
+  background(255);
+}
+
+function draw() {
+  walker.step();
+  walker.show();
+}
+
+class Walker {
+  constructor() {
+    this.x = width / 2;
+    this.y = height / 2;
+  }
+
+  show() {
+    stroke(0, 50);
+    point(this.x, this.y);
+  }
+
+  step() {
+
+    let maxStep = 20;
+
+    let stepx = randomSignedStep(maxStep);
+    let stepy = randomSignedStep(maxStep);
+
+    this.x += stepx;
+    this.y += stepy;
+  }
+}
+
+
+function randomSignedStep(max) {
+  while (true) {
+    let r1 = random(1);
+    let r2 = random(1);
+    let probability = r1 * r1; 
+
+    if (r2 < probability) {
+      let step = r1 * max; 
+      return random() < 0.5 ? -step : step; 
+    }
+  }
+}
+```
+**Enlace al programa:**
+[Programa](https://editor.p5js.org/TatoDesignn/full/IAKQfTFdX)
+
+### 📥Actividad 7:
+
+**Qué resultados esperaba obtener**
+
+Quiero controlar el tamaño del circulo, tambien cambiar color con el que pinta y aplicarle un parámetro alpha para generar ese desvanecimiento anterior visto en los ejercicios.
+
+**Codigo:**
+```javascript
+// The Nature of Code
+// Daniel Shiffman
+// http://natureofcode.com
+
+let walker;
+
+function setup() {
+  createCanvas(640, 240); 
+  walker = new Walker(); 
+  background(255);
+}
+
+function draw() {
+  fill(255, 10);
+  noStroke();
+  rect(0, 0, width, height);
+
+  walker.step();
+  walker.show();
+}
+
+class Walker {
+  constructor() {
+    this.tx = 0;
+    this.ty = 10000;
+    this.ts = 20000; 
+    this.tc = 30000; 
+  }
+
+  step() {
+    this.x = map(noise(this.tx), 0, 1, 0, width);
+    this.y = map(noise(this.ty), 0, 1, 0, height);
+    this.size = map(noise(this.ts), 0, 1, 10, 60); 
+    this.color = map(noise(this.tc), 0, 1, 50, 200); 
+
+    this.tx += 0.01;
+    this.ty += 0.01;
+    this.ts += 0.01;
+    this.tc += 0.01;
+  }
+
+  show() {
+    noStroke();
+    fill(this.color, 100, 180, 180); 
+    ellipse(this.x, this.y, this.size, this.size);
+  }
+}
+```
+**Enlace del programa:**
+[Programa](https://editor.p5js.org/TatoDesignn/sketches/1tokCmTAM)
+
