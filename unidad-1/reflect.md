@@ -42,3 +42,33 @@ Lo más difícil fue lograr que no se pisaran entre sí, como que noise() no opa
 **¿Qué harías diferente si empezaras otra vez?**
 Probaría desde el principio con múltiples walkers o elementos interactuando entre sí. También planearía mejor la parte de la interacción, porque fue algo que agregué después y creo que podría haber sido más protagónica si lo pensaba desde el arranque.
 
+
+### 📥 Actividad 10:
+
+** Retroalimentación a la Actividad 08 de Juan jose Amaya**
+
+Primero que todo, felicitar al compañero. Me pareció muy interesante el enfoque de representar un paisaje natural usando elementos de aleatoriedad. Me gustó mucho cómo dividiste la obra en capas con funciones distintas: el cielo, los árboles y el río. Eso le da estructura visual y hace que cada componente tenga su propia lógica.
+
+La obra logra un muy buen balance entre lo técnico y lo visual. Me gustó que lo pensaras como un “paisaje vivo” más que como una animación abstracta sin sentido.
+
+### 📥 Actividad 11:
+
+**Continuar:**
+
+La actividad que más me ayudó a entender todo fue la de modificar el código del walker usando diferentes distribuciones. Poder ver la diferencia entre random(), randomGaussian() y noise() en vivo me hizo comprender realmente cómo afectan el movimiento y el comportamiento de un objeto en pantalla.
+
+**Dejar de hacer:**
+
+Hubo momentos en los que algunas explicaciones sentí que se repetían un poco o no agregaban algo nuevo, especialmente en los primeros textos sobre aleatoriedad.
+
+**Empezar a hacer:**
+
+Me faltaron ejemplos de obras reales de artistas que usen estas técnicas. Sería increíble ver referencias visuales o videos de obras generativas de artistas actuales que trabajen con código.
+
+**Balance Teoría–Práctica:**
+
+Creo que estuvo bastante bien equilibrado. Me gustó que primero analizáramos conceptos y después pasáramos directo al código. Sí sentí que la mejor parte fue cuando tocaba programar directamente, así que quizás se podrían reducir un poco más los textos o hacerlos más visuales para que no se sientan pesados
+
+**Comentario adicional:**
+
+En general, disfruté bastante la unidad. Me gustó que estuviera pensada para ir paso a paso, que tuviera libertad creativa, y que al final pudiera hacer una obra mía aplicando todo.
