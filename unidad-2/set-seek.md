@@ -142,4 +142,102 @@ dist() sirve para medir la distancia entre dos puntos en el espacio, cuando esos
 
 ### 📥Actividad 5:
 
+**Codigo:**
 
+```javascript
+let t = 0;
+let speed = 0.01;
+
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(180);
+
+  let origen = createVector(100, 300);     
+  let azul = createVector(0, -200);         
+  let rojo = createVector(200, 0);          
+  let verde = p5.Vector.add(azul, rojo);    
+
+  let esquinaAzul = p5.Vector.add(origen, azul);             
+  let esquinaRoja = p5.Vector.add(esquinaAzul, rojo);        
+  let puntoVerde = p5.Vector.lerp(origen, esquinaRoja, t); 
+
+  drawArrow(origen, azul, 'blue');
+  drawArrow(esquinaAzul, rojo, 'red');
+  drawArrow(origen, verde, 'green');
+
+  let vectorMorado = p5.Vector.sub(puntoVerde, esquinaAzul);
+  drawArrow(esquinaAzul, vectorMorado, 'purple');
+
+  t += speed;
+  if (t > 1 || t < 0) {
+    speed *= -1;
+  }
+}
+
+function drawArrow(base, vec, myColor) {
+  push();
+  stroke(myColor);
+  strokeWeight(3);
+  fill(myColor);
+  translate(base.x, base.y);
+  line(0, 0, vec.x, vec.y);
+  rotate(vec.heading());
+  let arrowSize = 10;
+  translate(vec.mag() - arrowSize, 0);
+  triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
+  pop();
+}
+```
+**¿Cómo funciona lerp() y lerpColor()?**
+
+Lerp() es una función, que nos permite encontrar un punto entre dos valores (o vectores) dependiendo de un parámetro t que va de 0 a 1.
+
+**¿Cómo se dibuja una flecha usando drawArrow()?**
+
+La función drawArrow(base, vec, color) que usamos dibuja una flecha en pantalla a partir de:
+- Un punto de inicio (base)
+- Un vector de dirección y magnitud (vec)
+- Un color
+
+### 📥 Actividad 6:
+
+**¿Cuál es el concepto del marco Motion 101 y cómo se interpreta geométricamente?**
+
+Motion 101 es el marco más básico de movimiento en programación con vectores. Funciona de la siguiente manera:
+
+1. Un objeto tiene una posición (dónde está).
+2. Tiene una velocidad (hacia dónde se mueve y qué tan rápido).
+3. En cada cuadro (draw()), la velocidad se suma a la posición.
+
+Geométricamente, lo podemos imaginar como una flecha (velocidad) que se añade a otra flecha (posición), desplazando el objeto en esa dirección.
+
+**¿Cómo se aplica Motion 101 en el ejemplo 1.7?**
+
+En el ejemplo 1.7, el autor crea una clase Mover que encapsula toda la lógica del movimiento.
+
+En el constructor, el objeto tiene dos vectores:
+- position: lugar inicial aleatorio.
+- velocity: dirección y velocidad aleatoria.
+
+### 📥 Actividad 7:
+
+**Experimento: probé tres tipos de aceleración**
+
+**Aceleración constante:**
+- Le di al objeto una aceleración fija a (0.05, 0.01).
+- El objeto empezó lento, pero fue aumentando su velocidad de forma constante. El movimiento se volvió más y más rápido hasta que salió de pantalla (si no había límite).
+- Observación: Se siente como un cohete despegando: acelera de forma progresiva y no se detiene. Muy útil para simular gravedad o impulso.
+
+**Aceleración aleatoria:**
+- En cada cuadro le asigné un nuevo vector de aceleración aleatorio.
+- El objeto se movía de forma errática, como si fuera una partícula en el aire. A veces aceleraba mucho, otras veces se frenaba de golpe.
+- Ideal para simular comportamiento orgánico, partículas, o movimientos impredecibles. No hay control, pero sí una sensación de vida.
+
+**Aceleración hacia el mouse:**
+
+- Calcule un vector desde la posición del objeto hacia el puntero del mouse, lo normalizo y lo multiplico por una fuerza.
+- El objeto perseguía al mouse suavemente. Mientras más lejos estaba, más rápido intentaba alcanzarlo. Si pasabas cerca, hacía curvas suaves para seguirte.
+- Este fue el más interesante visualmente. El movimiento es natural, como si el objeto tuviera “intención” o “curiosidad”. Perfecto para comportamientos inteligentes o seguimiento.
