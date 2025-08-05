@@ -78,4 +78,5 @@ class Walker {
 
 **4. Captura de pantalla:**
 
-![Mi Sketch](https://imgur.com/a/nXBA38N)
+<img width="706" height="652" alt="image" src="https://github.com/user-attachments/assets/76e4f90d-07c8-44e5-8c29-2b0af4cf0f9e" />
+
