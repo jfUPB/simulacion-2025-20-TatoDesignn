@@ -180,7 +180,10 @@ function drawHUD(target) {
   line(target.x, target.y - 5, target.x, target.y + 5);
 }
 ```
+**Enlace**
+https://editor.p5js.org/TatoDesignn/sketches/TyW9fIFmy
 
 <img width="843" height="593" alt="Captura de pantalla 2025-08-11 a la(s) 4 47 02 p m" src="https://github.com/user-attachments/assets/2a979e4b-f055-4ca3-875d-f9017af5c173" />
+
 
 
