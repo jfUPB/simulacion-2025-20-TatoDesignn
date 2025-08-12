@@ -42,3 +42,48 @@ Antes veía el movimiento en pantalla como un simple cambio de coordenadas. Ahor
 **Si tuviera una semana más:**
 
 Me gustaría probar un algoritmo de aceleración basado en campos de flujo (flow fields) para que el movimiento siga patrones invisibles en el espacio. También me gustaría experimentar con atractores y repulsores múltiples para lograr comportamientos más complejos e impredecibles.
+
+### 📥 Actividad 10:
+
+**Lo que funciona:**
+
+- La idea de trails multicolor que “pintan” el lienzo está clara y sí se ve reflejada en el sketch.
+- El círculo central como ancla visual ayuda a entender de dónde emergen los trazos.
+
+**Qué mejoraría:**
+
+- Un par de líneas en la bitácora sobre qué experiencia busca el espectador (calma orgánica vs. caos energético) alinea mejor diseño y parámetros.
+
+**Bien aplicado:**
+
+Flujo correcto: acceleration → velocity → position + acceleration.mult(0) al final.
+
+**Ajustes pro:**
+
+Tu Lévy puede producir saltos enormes (por la potencia negativa) y a veces “sucia” la composición. 
+
+**Punto fuerte:**
+
+Elegir Lévy flight para “trazos llamativos” es buena intuición: mezcla paseos cortos con saltos largos y genera texturas interesantes.
+
+**Código / legibilidad**
+
+Clase clara y responsabilidades separadas.
+
+### 📥Actividad 11:
+
+**Continuar:**
+
+Lo más útil fue trabajar con el marco Motion 101 integrado a diferentes algoritmos de aceleración. Me ayudó a entender que, controlando bien la aceleración, se pueden generar movimientos muy distintos sin necesidad de modificar la posición directamente.
+
+**Dejar de hacer:**
+
+Algunas actividades muy cortas de introducción (tipo solo modificar un valor y observar) se sintieron un poco repetitivas. Podrían compactarse para dejar más tiempo a los experimentos completos o a integrar varios conceptos en una sola pieza.
+
+**Empezar a hacer:**
+
+Me gustaría explorar más fuerzas físicas como fricción, atracción, repulsión y resortes, pero aplicadas en sistemas de partículas
+
+**Método de aprendizaje:**
+
+El paso de Seek (experimentos guiados) a Apply (obra libre) me pareció natural y efectivo porque primero entendí las piezas individuales y luego las integré a mi manera. La única mejora sería añadir un “mini desafío” de integración antes de la obra final.
