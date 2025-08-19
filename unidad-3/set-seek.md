@@ -2,3 +2,5 @@
 
 ## 🔎 Fase: Set + Seek
 
+No entregó, esta nota la deja el profesor
+
