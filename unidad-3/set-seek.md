@@ -1,7 +1,6 @@
 # Unidad 3
 
-## 🔎 Fase: Set + Seek
-
+## 🔎 Fase: Set + Seek (No entregó, esta nota la deja el profesor)
 
 ### 📥Actividad 9:
 
@@ -331,4 +330,5 @@ function keyPressed(){
 **Enlace:** https://editor.p5js.org/TatoDesignn/sketches/vPI1l6RRa
 
 <img width="844" height="557" alt="Captura de pantalla 2025-08-20 a la(s) 11 14 53 p m" src="https://github.com/user-attachments/assets/f22a703c-c78d-4ac3-9e83-a60842ec79d4" />
+
 
