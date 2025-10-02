@@ -474,9 +474,209 @@ class MovingRepeller {
 
 <img width="313" height="172" alt="Captura de pantalla 2025-10-01 a la(s) 10 50 35 p m" src="https://github.com/user-attachments/assets/7925f80e-2794-421d-995c-8bff67f45b41" />
 
+**👍🏻 Nota Actividad 2:** Considero que cumpli con las actividades propuestas y los criterios me apegue mucho a lo que decia la rubrica, pero debido a mi incumplimiento con esta unidad considero que un 4.0 seria una nota apropiada
 
+## ✅ Actividad 3
 
+1. Para esta actividad, utilizando lo aplicado en la actividad anterior donde se veian un monton de particulas moviendose por toda la pantalla quise adaptarlo algo mas bonito, quiero hacer una especie de fuegos artificiales, con un click se dispara, se dezplaza hacia arriba y al llegar hasta su altura limite explote. Para hacerlo mucho mas interesante quiero que sean de colores aleatorios para no volverlo muy repetitivo.
 
+2. Bocetos (descritos):
+- Línea vertical con triángulo que deja una estela.
+- Corona radial de puntos pós-explosión.
+- Caída con estelas y halos.
+- **Interacción definida:** Click del mouse = disparo de un cohete desde la base hacia arriba. El punto de click define el x del lanzamiento, el sistema controla una altura objetivo alta para asegurar la explosión.
 
+3. **¿Qué conceptos uso de cada unidad?**
+- Unidad 1 – Aleatoriedad (random/gauss/Perlin):
+- Unidad 2 – Vectores, heading/rotate:
+- Unidad 3 – Fuerzas: Gravedad aplicada frame a frame a todas las partículas (applyForce).
+- Unidad 4 – Sinusoides: Pequeño flicker (parpadeo)
 
+4. **Gestión de vida y memoria**
+- Cada Particle tiene lifespan. Cuando llega a 0 → isDead() true → splice del array 
+- El cohete no se borra por vida (para no “morir” antes del clímax); explota y se elimina justo después, reemplazándolo por fragmentos con vida finita.
+
+5. **Interaccion:**
+
+**Click:** lanza un cohete desde la base (x del click) con velocidad vertical inicial controlada.
+
+6. **Enlace al proyecto:** https://editor.p5js.org/TatoDesignn/sketches/PTioAd979
+
+7. **Codigo:**
+```javascript
+// 🎆 Fuegos Artificiales: TODOS explotan arriba
+// Click para lanzar cohete
+
+let particles = [];
+
+function setup() {
+  createCanvas(960, 560);
+  colorMode(HSB, 360, 100, 100, 1);
+  background(0);
+}
+
+function draw() {
+  background(0, 0.12); // estela suave
+
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+
+    // Fuerza global: gravedad
+    p.applyForce(createVector(0, 0.08 * p.mass));
+
+    // Actualización y dibujo
+    p.update();
+    p.show();
+
+    // Si es cohete: explota al llegar ARRIBA o si empieza a caer
+    if (p instanceof Rocket) {
+      if (p.pos.y <= p.targetY || p.vel.y >= 0) {
+        p.explode();
+        particles.splice(i, 1);
+        continue;
+      }
+    }
+
+    if (p.isDead()) particles.splice(i, 1);
+  }
+}
+
+function mousePressed() {
+  // Lanzar cohete desde abajo
+  const start = createVector(mouseX, height + 8);
+  const v0 = createVector(0, -random(6, 8));         // subida moderada
+  const hue = random(360);
+  const targetY = random(height * 0.08, height * 0.18); // altura objetivo (bien arriba)
+  particles.push(new Rocket(start, v0, hue, targetY));
+}
+
+// -------------- Base --------------
+class Particle {
+  constructor(pos, vel, mass = 1) {
+    this.pos = pos.copy();
+    this.vel = vel.copy();
+    this.acc = createVector(0, 0);
+    this.mass = mass;
+    this.lifespan = 255;
+    this.hue = random(360);
+    this.size = 4;
+    this.prev = this.pos.copy();
+  }
+  applyForce(f) { this.acc.add(p5.Vector.div(f, this.mass)); }
+  update() {
+    this.vel.add(this.acc);
+    this.pos.add(this.vel);
+    this.acc.mult(0);
+    this.prev.set(this.pos);
+    this.lifespan -= 3; // por defecto las partículas sí se van apagando
+  }
+  isDead() { return this.lifespan <= 0; }
+  show() {
+    noStroke();
+    fill(this.hue, 80, 100, this.lifespan / 255);
+    circle(this.pos.x, this.pos.y, this.size);
+  }
+}
+
+// -------------- Cohete --------------
+class Rocket extends Particle {
+  constructor(pos, vel, hue, targetY) {
+    super(pos, vel, 1);
+    this.hue = hue;
+    this.size = 7;
+    this.targetY = targetY;
+    this.lifespan = 1e9; // ¡no se apaga mientras sube!
+  }
+
+  // IMPORTANTE: el cohete NO pierde vida por frame
+  update() {
+    this.vel.add(this.acc);
+    this.pos.add(this.vel);
+    this.acc.mult(0);
+    this.prev.set(this.pos);
+  }
+
+  explode() {
+    // Muchas chispas en todas direcciones
+    const n = floor(random(120, 220));
+    for (let i = 0; i < n; i++) {
+      const angle = random(TWO_PI);
+      const speed = constrain(abs(randomGaussian(3.8, 1.2)), 1.2, 6.2);
+      const v = p5.Vector.fromAngle(angle).mult(speed);
+      particles.push(new Shard(this.pos, v, (this.hue + random(-18, 18) + 360) % 360));
+    }
+    // Fogonazo central
+    particles.push(new Glow(this.pos, createVector(0, 0), this.hue, random(16, 22), 180));
+  }
+
+  show() {
+    push();
+    translate(this.pos.x, this.pos.y);
+    rotate(this.vel.heading());
+    noStroke();
+    const flick = 70 + 10 * sin(frameCount * 0.22);
+    fill(this.hue, 85, flick, 0.95);
+    triangle(10, 0, -10, 6, -10, -6);
+    pop();
+  }
+}
+
+// -------------- Fragmento (chispa) --------------
+class Shard extends Particle {
+  constructor(pos, vel, hue) {
+    super(pos, vel, 0.5);
+    this.hue = hue;
+    this.size = random(2, 4.5);
+    this.tw = random(TWO_PI);
+    this.fade = random(1.0, 1.6);
+  }
+  update() {
+    this.vel.add(this.acc);
+    this.pos.add(this.vel);
+    this.acc.mult(0);
+    this.prev.set(this.pos);
+    this.lifespan -= this.fade * 3.0; // se apaga más rápido que el cohete
+  }
+  show() {
+    // estela
+    stroke(this.hue, 85, 60, map(this.lifespan, 0, 255, 0, 0.8, true));
+    strokeWeight(1.25);
+    line(this.prev.x, this.prev.y, this.pos.x, this.pos.y);
+    // núcleo
+    noStroke();
+    const lum = 60 + 18 * sin(frameCount * 0.33 + this.tw);
+    fill(this.hue, 85, lum, 0.95);
+    circle(this.pos.x, this.pos.y, this.size);
+  }
+}
+
+// -------------- Halo (brillo) --------------
+class Glow extends Particle {
+  constructor(pos, vel, hue, baseR = 14, life = 140) {
+    super(pos, vel, 0.5);
+    this.hue = hue;
+    this.r = baseR;
+    this.lifespan = life;
+  }
+  update() {
+    this.vel.add(this.acc);
+    this.pos.add(this.vel);
+    this.acc.mult(0);
+    this.r += 0.28;
+    this.lifespan -= 1.6;
+  }
+  show() {
+    noFill();
+    stroke(this.hue, 85, 70, map(this.lifespan, 0, 140, 0, 0.55, true));
+    strokeWeight(2);
+    circle(this.pos.x, this.pos.y, this.r * 2);
+  }
+}
+```
+
+8. **Captura de pantalla:**
+
+<img width="664" height="481" alt="Captura de pantalla 2025-10-02 a la(s) 12 25 52 a m" src="https://github.com/user-attachments/assets/e40318af-e756-4831-a368-36ffca1f8f86" />
+
+**👍🏻 Nota Actividad 3:** al igual que en la anterior Considero que cumpli con los criterios, pero lo mismo debido a mi incumplimiento con esta unidad considero que un 4.0 seria una nota apropiada.
 
